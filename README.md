@@ -1,7 +1,7 @@
 
 # PyPlotHDF5
 
-A library to automatically save data in generated for PyPlot figures in HDF5 format. Usefull for complying with the FAIR principles. Supported functions are  `plot`, `errorbar`, `axhline`, `axvline`, `savefig`, `scatter`, `imshow`. More functions can be added by request easily.
+A library to automatically save data used to create a plot into a file using HDF5 format. Useful for complying with the FAIR principles. Supported functions are  `plot`, `errorbar`, `axhline`, `axvline`, `savefig`, `scatter`, `imshow`. More functions can be added by request easily.
 
 ```jl
 using PyPlotHDF5
