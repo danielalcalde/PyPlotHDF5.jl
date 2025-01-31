@@ -9,3 +9,6 @@ plot([1,2,3], [2,4,6], reset=true) # reset=true will clear the current saved dat
 plot([1,2,3], [2,4,6])
 savefig("test.pdf") # Will save an hdf5 file called test.pdf.hdf5
 ```
+
+## Installation
+]add https://github.com/danielalcalde/PyPlotHDF5.jl/tree/main
