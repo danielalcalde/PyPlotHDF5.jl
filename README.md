@@ -5,7 +5,7 @@ A library to automatically save data in generated for PyPlot figures in HDF5 for
 
 ´´´jl
 using PyPlotHDF5
-plot([1,2,3], [2,4,6], reset=true) # reset=true will clear the current saved data
+plot([1,2,3], [2,4,6], reset=true) # reset=true will clear the current saved data or alternatively use reset_hd5data() to clear the data
 plot([1,2,3], [2,4,6])
 savefig("test.pdf")
 ´´´

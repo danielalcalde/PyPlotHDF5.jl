@@ -22,7 +22,7 @@ for sym in names_
         @eval export $sym
     end
 end
-export reset_hd5data
+export reset_hd5data, add_hd5data
 
 # Initialize plot data storage
 plot_data_ = Any[]
@@ -33,7 +33,7 @@ function reset_hd5data()
 end
 
 # Function to add data to plot_data_
-function add_data(args...; reset=false, name="", kwargs...)
+function add_hd5data(args...; reset=false, name="", kwargs...)
     global plot_data_
     if reset
         reset_hd5data()
@@ -54,6 +54,9 @@ function add_data(args...; reset=false, name="", kwargs...)
     if :label in keys(kwargs)
         d["label"] = kwargs[:label]
     end
+    if :yerr in keys(kwargs)
+        d["yerr"] = kwargs[:yerr]
+    end
     if d != Dict()
         d["name"] = name
         push!(plot_data_, d)
@@ -62,37 +65,37 @@ end
 
 # Redefine plot function
 function plot(args...; reset=false, kwargs...)
-    add_data(args...; name="plot_", reset, kwargs...)
+    add_hd5data(args...; name="plot_", reset, kwargs...)
     return PyPlot.plot(args...; kwargs...)
 end
 
 # Corrected errorbar function
 function errorbar(args...; reset=false, kwargs...)
-    add_data(args...; name="errorbar_", reset, kwargs...)
+    add_hd5data(args...; name="errorbar_", reset, kwargs...)
     return PyPlot.errorbar(args...; kwargs...)
 end
 
 # Define hline function
 function axhline(args...; reset=false, kwargs...)
-    add_data(args...; name="hline_", reset, kwargs...)
-    return PyPlot.axhline(y; kwargs...)
+    add_hd5data(args...; name="hline_", reset, kwargs...)
+    return PyPlot.axhline(args...; kwargs...)
 end
 
 # Define vline function
 function axvline(args...; reset=false, kwargs...)
-    add_data(args...; name="vline_", reset, kwargs...)
+    add_hd5data(args...; name="vline_", reset, kwargs...)
     return PyPlot.axvline(args...; kwargs...)
 end
 
 # Define scatter function
 function scatter(args...; reset=false, kwargs...)
-    add_data(args...; name="scatter_", reset, kwargs...)
+    add_hd5data(args...; name="scatter_", reset, kwargs...)
     return PyPlot.scatter(args...; kwargs...)
 end
 
 # Define heatmap function
 function imshow(args...; reset=false, kwargs...)
-    add_data(args...; name="imshow_", reset, kwargs...)
+    add_hd5data(args...; name="imshow_", reset, kwargs...)
     return PyPlot.imshow(args...; kwargs...)
 end
 
